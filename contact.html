@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zenofest 2K25 Contact</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  position: relative;
+  padding-bottom: 50px;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  z-index: 1000;
+}
+.navbar-items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 10px 15px;
+}
+.navbar-items a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.navbar-items a i { font-size: 1rem; }
+.navbar-items a:hover {
+  background: linear-gradient(90deg, #00f0ff, #0ff);
+  color: #000;
+  box-shadow: 0 0 12px #0ff;
+  transform: translateY(-2px);
+}
+.navbar-items a.active {
+  background: #0ff;
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 15px #0ff;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1100;
+}
+.menu-toggle span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #0ff;
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Contact Container */
+.contact-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  margin: 100px auto 20px;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 0 20px #00f0ff22;
+  text-align: center;
+}
+
+.contact-container h2 {
+  font-size: clamp(1.8rem, 4vw, 2rem);
+  color: #00f0ff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #00f0ff;
+}
+
+.email-display {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  background: #111;
+  padding: 15px 25px;
+  border-radius: 10px;
+  border: 2px solid #00f0ff;
+  color: #00f0ff;
+  text-shadow: 0 0 5px #00f0ff;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+.email-display a {
+  color: #00f0ff;
+  text-decoration: underline;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px #00f0ff33;
+}
+
+iframe {
+  width: 100%;
+  height: 300px;
+  border: 0;
+}
+
+/* Binary Canvas */
+#binaryBG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .menu-toggle { display: block; }
+  .navbar-items { display: none; flex-direction: column; gap: 10px; text-align: center; }
+  .navbar.open .navbar-items { display: flex; }
+  .contact-container { padding: 30px 15px; }
+  .email-display { font-size: 1.1rem; padding: 12px 18px; }
+}
+@media(max-width:480px){
+  .contact-container h2 { font-size: 1.5rem; }
+  .email-display { font-size: 1rem; padding: 10px 15px; }
+  iframe { height: 220px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar" id="navbar">
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="navbar-items">
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="event.html"><i class="fas fa-calendar-alt"></i> Event</a>
+    <a href="timeline.html"><i class="fas fa-stream"></i> Timeline</a>
+    <a href="expo.html"><i class="fas fa-laptop-code"></i> Project Expo</a>
+    <a href="prizes.html"><i class="fas fa-trophy"></i> Prizes</a>
+    <a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+<!-- Contact Section -->
+<section id="contact">
+  <div class="contact-container">
+    <h2>Contact the Organizing Team</h2>
+    <div class="email-display">
+      📧 Email: <a href="mailto:itassociation@psr.edu.in">itassociation@psr.edu.in</a>
+    </div>
+
+    <!-- Embedded Google Map -->
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126203.96995823497!2d77.69839910000001!3d9.2905762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b06b85670932313%3A0xd8caf94254b94c1a!2sPSR%20Engineering%20College!5e0!3m2!1sen!2sin!4v1693812345678"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Binary Rain Background -->
+  <canvas id="binaryBG"></canvas>
+</section>
+
+<script>
+  // Hamburger Menu Toggle
+  function toggleMenu(){
+    document.getElementById('navbar').classList.toggle('open');
+  }
+
+  // Binary Rain Background
+  const canvas = document.getElementById('binaryBG');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const cols = Math.floor(canvas.width / 20) + 1;
+  const ypos = Array(cols).fill(0);
+
+  function binaryRain() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = Math.random() > 0.5 ? "#00f0ff" : "#a020f0";
+    ctx.font = "18px Orbitron";
+
+    ypos.forEach((y, ind) => {
+      const text = Math.random() > 0.5 ? "0" : "1";
+      const x = ind * 20;
+      ctx.fillText(text, x, y);
+      if (y > canvas.height + Math.random() * 10000) ypos[ind] = 0;
+      else ypos[ind] = y + 20;
+    });
+  }
+  setInterval(binaryRain, 60);
+
+  window.addEventListener('resize', ()=> {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>

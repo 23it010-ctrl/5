@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zenofest 2K25</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+body { font-family:'Orbitron', sans-serif; background:#000; color:#fff; overflow-x:hidden; min-height:100vh; }
+
+/* Binary Background */
+#binaryBG { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background:#000; }
+
+/* Navbar */
+.navbar {
+  position: fixed; top:20px; left:50%; transform:translateX(-50%);
+  width:90%; background: rgba(0,0,0,0.85); border-radius:15px;
+  box-shadow:0 0 15px rgba(0,255,255,0.3); z-index:1000;
+}
+.navbar-items {
+  display:flex; justify-content:center; flex-wrap:wrap; gap:15px; padding:10px 15px;
+}
+.navbar-items a {
+  display:flex; align-items:center; gap:5px;
+  color:#aaa; text-decoration:none; font-size:0.9rem;
+  padding:8px 12px; border-radius:8px; transition:all 0.3s;
+}
+.navbar-items a i { font-size:1rem; }
+.navbar-items a:hover { background:linear-gradient(90deg,#00f0ff,#0ff); color:#000; box-shadow:0 0 12px #0ff; transform:translateY(-2px); }
+.navbar-items a.active { background:#0ff; color:#000; font-weight:700; box-shadow:0 0 15px #0ff; }
+
+/* Hamburger Menu for Mobile */
+.menu-toggle {
+  display:none;
+  position:absolute; top:10px; right:20px;
+  cursor:pointer; z-index:1100;
+}
+.menu-toggle span {
+  display:block; width:25px; height:3px; background:#0ff; margin:5px 0; transition:0.3s;
+}
+
+/* Social Icons */
+.social-icons {
+  position: fixed; top:50%; left:10px; transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:12px; z-index:9;
+}
+.social-icons a {
+  font-size:1.2rem; padding:8px; border-radius:6px;
+  color:#fff; width:35px; height:35px; display:flex;
+  align-items:center; justify-content:center; transition: transform 0.3s;
+}
+.social-icons a:hover { transform: scale(1.2); }
+.facebook { background:#1877F2; box-shadow:0 0 12px #1877F2; }
+.instagram { background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); box-shadow:0 0 12px #d6249f; }
+.youtube { background:#eb0000; box-shadow:0 0 12px #eb0000; }
+.linkedin { background:#0A66C2; box-shadow:0 0 12px #0A66C2; }
+
+/* Top Center Title */
+.top-center { position:absolute; top:100px; width:100%; text-align:center; z-index:3; padding:0 20px; }
+.box1 { background: rgba(0,0,0,0.6); border-radius:10px; display:inline-block; padding:20px 30px; }
+.top-center h1 {
+  font-size: clamp(2rem,8vw,6rem); font-weight:900; letter-spacing:8px;
+  color:transparent; -webkit-text-stroke:1px #888;
+  background:radial-gradient(circle,#fff,#0ff,#000);
+  -webkit-background-clip:text; background-clip:text; animation:glow 3s ease-in-out infinite;
+}
+@keyframes glow { 0%,100% { text-shadow:0 0 10px #0ff,0 0 20px #0ff;} 50% { text-shadow:0 0 20px #0ff,0 0 40px #0ff; } }
+.top-center h2 { font-size:1.2rem; margin-top:10px; }
+.top-center h3 { font-size:1rem; margin-top:8px; font-weight:normal; }
+
+/* Bottom Center Timer + Register */
+.bottom-center { position:absolute; bottom:50px; width:100%; text-align:center; z-index:3; padding:0 15px; }
+.box { border:2px solid #0ff; background: rgba(0,0,0,0.85); border-radius:10px; display:inline-block; padding:20px 40px; max-width:90%; }
+
+/* Digital Timer Styling */
+#timer {
+  font-size: 2.5rem;
+  color: #0f0;
+  background: #000;
+  padding: 12px 25px;
+  border-radius: 8px;
+  display: inline-block;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px #0f0, 0 0 15px #0f0;
+  box-shadow: 0 0 15px #0ff inset, 0 0 10px #0ff;
+}
+.closed {
+  color: red !important;
+  text-shadow: 0 0 10px red, 0 0 20px red !important;
+  animation: blink 1s infinite alternate;
+}
+@keyframes blink {
+  from { opacity: 1; }
+  to { opacity: 0.4; }
+}
+
+.register-btn {
+  display:inline-block; background:linear-gradient(90deg,#ff9900,#ff00cc);
+  color:black; font-size:1rem; font-weight:600; border:none; border-radius:50px;
+  padding:10px 24px; cursor:pointer; text-decoration:none; margin-top:15px; transition:0.3s;
+}
+.register-btn:hover { transform: scale(1.05); box-shadow:0 0 20px rgba(255,0,204,0.6); }
+
+/* Responsive */
+@media(max-width:768px){
+  .navbar { width:95%; left:50%; transform:translateX(-50%); }
+  .navbar-items { display:none; flex-direction:column; gap:10px; padding:10px; background:rgba(0,0,0,0.9); border-radius:10px; position:absolute; top:50px; left:0; width:100%; }
+  .navbar-items a { font-size:0.85rem; padding:8px; }
+  .menu-toggle { display:block; }
+  .social-icons { left:auto; right:10px; top:auto; bottom:10px; flex-direction:row; gap:10px; transform:none; }
+  .social-icons a { width:30px; height:30px; font-size:1rem; padding:5px; }
+  .top-center h1 { font-size:2.5rem; letter-spacing:4px; }
+  .top-center h2 { font-size:1rem; }
+  .box { padding:15px 20px; }
+  #timer { font-size:1.5rem; padding:10px 15px; }
+  .register-btn { padding:8px 18px; font-size:0.9rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="navbar-items">
+    <a href="home.html" class="active"><i class="fas fa-home"></i>Home</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i>About</a>
+    <a href="event.html"><i class="fas fa-calendar-alt"></i>Event</a>
+    <a href="timeline.html"><i class="fas fa-stream"></i>Timeline</a>
+    <a href="expo.html"><i class="fas fa-laptop-code"></i>Project Expo</a>
+    <a href="prizes.html"><i class="fas fa-trophy"></i>Prizes</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
+  </div>
+</div>
+
+<!-- Social Icons -->
+<div class="social-icons">
+  <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://www.instagram.com/zenofest_2k25" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.youtube.com/@psrit" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+  <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+</div>
+
+<!-- Top Center Title -->
+<div class="top-center">
+  <div class="box1">
+    <h1>ZENOFEST <sup>2K25</sup></h1>
+    <h2>National Level Project Expo • PSR Engineering College</h2>
+    <h3>Department of Information Technology (IT)</h3>
+  </div>
+</div>
+
+<!-- Bottom Center Timer + Register -->
+<div class="bottom-center">
+  <div class="box">
+    <h3>Registration ends in</h3>
+    <div id="timer">00:00:00</div><br>
+    <a href="https://tinyurl.com/Zenofest" target="_blank" id="registerBtn" class="register-btn">Register →</a>
+  </div>
+</div>
+
+<!-- Binary Rain Background -->
+<canvas id="binaryBG"></canvas>
+
+<script>
+  // Hamburger Menu Toggle
+  function toggleMenu(){
+    const menu = document.querySelector('.navbar-items');
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+  }
+
+  // Countdown Timer
+  const eventDate = new Date("2025-09-28T22:00:00").getTime(); // 28 Sep 2025, 10:00 PM
+
+  function updateTimer() {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    if (distance <= 0) {
+      document.getElementById("timer").innerHTML = "CLOSED";
+      document.getElementById("timer").classList.add("closed");
+      const regBtn = document.getElementById("registerBtn");
+      if (regBtn) regBtn.style.display = "none"; // Hide button
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("timer").innerHTML =
+      (days < 10 ? "0" : "") + days + "D : " +
+      (hours < 10 ? "0" : "") + hours + "H : " +
+      (minutes < 10 ? "0" : "") + minutes + "M : " +
+      (seconds < 10 ? "0" : "") + seconds + "S";
+  }
+
+  setInterval(updateTimer, 1000);
+  updateTimer();
+
+  // Binary Rain Background
+  const canvas = document.getElementById('binaryBG');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const cols = Math.floor(canvas.width / 20) + 1;
+  const ypos = Array(cols).fill(0);
+
+  function binaryRain() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = Math.random() > 0.5 ? "#00f0ff" : "#a020f0";
+    ctx.font = "18px Orbitron";
+
+    ypos.forEach((y, ind) => {
+      const text = Math.random() > 0.5 ? "0" : "1";
+      const x = ind * 20;
+      ctx.fillText(text, x, y);
+      if (y > canvas.height + Math.random() * 10000) ypos[ind] = 0;
+      else ypos[ind] = y + 20;
+    });
+  }
+  setInterval(binaryRain, 60);
+
+  window.addEventListener('resize', ()=> {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
